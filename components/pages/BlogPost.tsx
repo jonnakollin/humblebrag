@@ -4,7 +4,7 @@ import Markdown from 'react-markdown'
 import FsLightbox from 'fslightbox-react'
 import PageLayout from '../layout/PageLayout'
 import Hero from '../Hero'
-import { BlogPost } from '../../types'
+import { BlogPost as BlogPostType, Asset } from '../../types'
 
 const BlogContent = styled(Markdown)`
     margin: 0 auto 40px;
@@ -43,7 +43,7 @@ const Image = styled.img`
     cursor: pointer;
 `
 
-const BlogPost = ({ title, featuredImages, publishedDate, category, content, images }: BlogPost) => {
+const BlogPost = ({ title, featuredImages, publishedDate, category, content, images }: BlogPostType) => {
     const [toggler, setToggler] = useState(false);
 
     return (
@@ -52,7 +52,7 @@ const BlogPost = ({ title, featuredImages, publishedDate, category, content, ima
             <PageLayout>
                 {content && <BlogContent source={content} />}
                 <Images>
-                    {images?.map((image) => (
+                    {images?.map((image: Asset) => (
                         <Image src={image.fields.file.url} onClick={() => setToggler(!toggler)} />
                     ))}
                 </Images>
@@ -60,7 +60,7 @@ const BlogPost = ({ title, featuredImages, publishedDate, category, content, ima
             <FsLightbox
                 toggler={toggler}
                 sources={
-                    images?.map((image) => (
+                    images?.map((image: Asset) => (
                         image?.fields?.file?.url
                     ))
                 }

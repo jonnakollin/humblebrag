@@ -12,5 +12,16 @@ export interface BlogPosts {
 }
 
 export interface Page {
+    title: string;
+    slug: string;
+    image: any;
+    content: string;
+}
 
+export interface Asset {
+    fields: {
+        file: {
+            url: string;
+        };
+    };
 }

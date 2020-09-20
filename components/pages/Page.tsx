@@ -3,12 +3,7 @@ import styled from 'styled-components'
 import Markdown from 'react-markdown'
 import Hero from '../Hero'
 import PageLayout from '../layout/PageLayout'
-
-interface PageProps {
-    title: string;
-    image: any;
-    content: string;
-}
+import { Page as PageType } from '../../types';
 
 const StyledPage = styled.div`
   animation: ${({ theme }) => theme.animation.zoom} 0.5s;
@@ -31,10 +26,10 @@ const Content = styled(Markdown)`
 `
 
 
-const Page = ({ title, image, content }: PageProps) => {
+const Page = ({ title, image, content }: PageType) => {
     return (
         <StyledPage>
-            <Hero image={image?.fields?.file.url} title={title}></Hero>
+            <Hero image={image} title={title}></Hero>
             <PageLayout>
                 {content && <Content source={content} />}
             </PageLayout>
