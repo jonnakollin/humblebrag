@@ -50,7 +50,7 @@ const StyledBlogInfo = styled(BlogInfo)`
 const Hero = ({ image, title, date, category }: HeroProps) => {
     return (
         <StyledHero image={image}>
-            <StyledBlogInfo title={title} publishedDate={date} category={category} headline />
+            <StyledBlogInfo title={title} publishedDate={date} category={category} heading />
         </StyledHero>
     )
 }

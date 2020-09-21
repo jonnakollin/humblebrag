@@ -1,6 +1,6 @@
-import HomePage from '../components/pages/HomePage';
+import HomePage from '../components/pages/HomePage'
 import { BlogPosts } from '../types'
-import { getAllPosts } from '../api/api';
+import { getAllPosts } from '../api/api'
 
 const Home = ({ posts }: BlogPosts) => <HomePage posts={posts} />
 

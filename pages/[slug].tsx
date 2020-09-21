@@ -1,18 +1,25 @@
-import { GetStaticProps, GetStaticPaths } from 'next'
-import StyledPage from '../components/pages/Page'
+import { GetStaticProps, GetStaticPaths, GetStaticPropsContext } from 'next'
+import PageComponent from '../components/pages/Page'
 import { getPageBySlug, getAllPagesWithSlug } from '../api/api'
-import { Page as PageType } from '../types';
+import { Page as PageType } from '../types'
 
 interface PageProps {
     page: PageType
 }
 
-const Page = ({ page }: PageProps) => {
-    return <StyledPage {...page} />
+export const getStaticPaths: GetStaticPaths = async () => {
+    const pages = await getAllPagesWithSlug()
+    const paths = pages.map((page) => ({
+        params: { slug: page.slug },
+    }))
+    return {
+        paths,
+        fallback: true,
+    }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }: any) => {
-    const page = await getPageBySlug(params.slug)
+export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
+    const page = await getPageBySlug(params?.slug)
     return {
         props: {
             page,
@@ -20,14 +27,6 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
     }
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    const pages = await getAllPagesWithSlug()
-    return {
-        paths: pages.map((post) => ({
-            params: { slug: post.slug },
-        })),
-        fallback: true,
-    }
-}
+const Page = ({ page }: PageProps) => <PageComponent {...page} />
 
 export default Page

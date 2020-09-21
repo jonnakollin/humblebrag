@@ -84,7 +84,7 @@ const Middle = styled.div`
     }
 `
 
-const Block = styled.div`
+const Paper = styled.div`
     @media ${({ theme }) => theme.device.large} {
         position: absolute;
         width: 100%;
@@ -102,7 +102,7 @@ const BlogTeaser = ({ title, slug, publishedDate, category, featuredImages }: Bl
                 <TopTape />
                 <Image src={featuredImages[0]?.fields?.file.url} />
                 <BottomTape />
-                <Block />
+                <Paper />
                 <Middle>
                     <BlogInfo title={title} publishedDate={publishedDate} slug={slug} arrow />
                 </Middle>

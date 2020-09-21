@@ -16,9 +16,8 @@ export const getAllPosts = async () => {
 export const getBlogPostBySlug = async (slug) => {
     const entries = await client.getEntries({
         content_type: "blogPost",
-        "fields.slug": slug
+        'fields.slug[in]': slug,
     })
-    console.log(entries.items[0])
     return entries.items[0]
 }
 
@@ -27,7 +26,7 @@ export const getPageBySlug = async (slug) => {
         content_type: "page",
         "fields.slug": slug
     })
-    return parsePage(entries.items[0])
+    return parsePageResponse(entries.items[0])
 }
 
 export const getAllPagesWithSlug = async () => {
@@ -38,7 +37,7 @@ export const getAllPagesWithSlug = async () => {
     return entries?.items?.map((post) => post.fields)
 }
 
-export async function getAllBlogPostsWithSlug() {
+export const getAllBlogPostsWithSlug = async () => {
     const entries = await client.getEntries({
         content_type: 'blogPost',
         select: 'fields.slug',
@@ -46,12 +45,7 @@ export async function getAllBlogPostsWithSlug() {
     return entries?.items?.map((post) => post.fields)
 }
 
-function parsePostEntries(entries, cb) {
-    console.log(entries?.items?.map(cb))
-    return entries?.items?.map(cb)
-}
-
-function parsePage({ fields }) {
+const parsePageResponse = ({ fields }) => {
     return {
         title: fields.title,
         slug: fields.slug,
@@ -60,14 +54,14 @@ function parsePage({ fields }) {
     }
 }
 
-function parseBlogPost({ fields }) {
+function parseBlogPostResponse({ fields }) {
     return {
         title: fields.title,
         slug: fields.slug,
         publishedDate: fields.publishedDate,
         category: fields.category,
-        featuredImages: fields.featuredImages[0]?.fields.file,
+        featuredImages: fields.featuredImages[0]?.fields.file.url,
         content: fields.content,
-        images: fields.images?.fields.file
+        images: fields.images?.fields.file.url
     }
 }

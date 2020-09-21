@@ -10,6 +10,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>heyjonna</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400|Playfair+Display|Questrial&display=swap" />
       </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyle />

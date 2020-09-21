@@ -7,7 +7,7 @@ interface HomePageProps {
     posts: any;
 }
 
-const StyledPageContainer = styled(PageContainer)`
+const StyledHomPage = styled(PageContainer)`
     padding: 20px 10px;
 
     @media ${({ theme }) => theme.device.large} {
@@ -24,11 +24,11 @@ const StyledPageContainer = styled(PageContainer)`
 
 const HomePage = ({ posts }: HomePageProps) => {
     return (
-        <StyledPageContainer>
-            {posts?.map((post, index) => (
+        <StyledHomPage>
+            {posts?.map((post, index: number) => (
                 <BlogTeaser key={index} {...post.fields} />
             ))}
-        </StyledPageContainer>
+        </StyledHomPage>
     )
 }
 

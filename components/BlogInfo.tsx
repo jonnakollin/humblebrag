@@ -9,7 +9,7 @@ interface BlogInfoProps {
     slug?: string;
     title: string;
     category?: string
-    headline?: boolean
+    heading?: boolean
     arrow?: boolean;
 }
 
@@ -47,7 +47,7 @@ const Title = styled.h2`
 
 `;
 
-const Headline = styled.h1`
+const Heading = styled.h1`
     margin-bottom: 5px;
 
        @media ${({ theme }) => theme.device.large} {
@@ -61,19 +61,19 @@ const Arrow = styled.h3`
     margin-top: 5px;
 `
 
-const BlogInfo = ({ className, publishedDate, slug, title, category, headline, arrow }: BlogInfoProps) => {
+const BlogInfo = ({ className, publishedDate, slug, title, category, heading, arrow }: BlogInfoProps) => {
     return (
         <StyledBlogInfo className={className}>
             <Border>
                 <BlogInfoContent>
                     {publishedDate && <Metadata dateTime={publishedDate}>{dateUtil.getMonthAsString(publishedDate)}</Metadata>}
-                    {!headline && (
+                    {!heading && (
                         <Title>
                             <Link href={`blog/${slug}`}><a>{title}</a></Link>
                         </Title>
                     )}
-                    {headline &&
-                        <Headline>{title}</Headline>
+                    {heading &&
+                        <Heading>{title}</Heading>
                     }
                     {category && <Metadata>{category}</Metadata>}
                     {arrow && <Arrow>&#8594;</Arrow>}
